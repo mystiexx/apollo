@@ -1,0 +1,21 @@
+.link {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #212121;
+}
+
+.link_active {
+  text-decoration: underline;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #212121;
+}
+
+.link_mobile {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #fff;
+}

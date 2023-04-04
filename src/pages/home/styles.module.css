@@ -1,0 +1,28 @@
+.bg {
+  background-image: url("../../components/svgs/background.svg");
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid red;
+  background-size: cover;
+}
+
+.moving_text:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .moving_text {
+    animation: marquee 30s linear infinite;
+  }
+}
