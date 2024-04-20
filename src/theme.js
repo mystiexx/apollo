@@ -5,10 +5,10 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        fontFamily: "Rubik",
-        color: "#212121",
+        fontFamily: "Ubuntu",
+        color: "#fff",
         fontWeight: 400,
-        backgroundColor: "white",
+        backgroundColor: "#0c0b0b",
       },
     },
   },

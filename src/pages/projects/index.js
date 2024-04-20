@@ -1,84 +1,70 @@
 import React, { useState } from "react";
 import {
-    Box,
-    Text,
-    Grid,
-    GridItem,
-    useMediaQuery,
-    Image,
+  Box,
+  Text,
+  Grid,
+  Container,
+  Center,
+  GridItem,
+  Button,
 } from "@chakra-ui/react";
 import { enums } from "./enums";
-import MoreInfo from "./moreInfo";
-import { Slide } from "react-awesome-reveal";
+import { colors } from "../../utils/colors";
+import Card from "./card";
 
 const Projects = () => {
-    const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
-    const [show, setShow] = useState(false);
-    const [project, setProject] = useState({});
-
-    return (
-        <Box pt="200px" pb="100px" id="projects">
-            <MoreInfo
-                isOpen={show}
-                onClose={() => setShow(false)}
-                project={project}
-            />
-            <Text fontWeight={800} fontSize="30px" textAlign={"left"}>
-                Projects
+  const [show, setShow] = useState(false);
+  const displayCount = show ? enums?.length : 6;
+  return (
+    <Box id="projects">
+      <Container maxW="container.lg">
+        <Center>
+          <Box bg={colors.light} p="4px" borderRadius={"6px"}>
+            <Text fontSize="18px" fontWeight="500" textAlign={"center"}>
+              Works
             </Text>
-            <Text fontSize="12px" fonWeight="400" mb="50px">
-                Building a Better Future Together...
-            </Text>
+          </Box>
+        </Center>
 
-            <Grid
-                templateColumns={isLargerThan800 ? "repeat(3,1fr)" : "auto"}
-                gap={10}
-            >
-                <Slide direction="up" cascade triggerOnce fraction='0'>
-                    {enums?.map((data) => (
-                        <GridItem key={data.id}>
-                            <Box
-                                border="1px solid #212121"
-                                borderRadius={"10px"}
-                                cursor="pointer"
-                                transition="0.4s ease"
-                                onClick={() => {
-                                    setShow(true);
-                                    setProject(data);
-                                }}
-                                _hover={{
-                                    background: "black",
-                                    color: "#fff",
-                                    transform: "scale(0.9)",
-                                }}
-                            >
-                                <Image
-                                    src={data.image}
-                                    alt="project"
-                                    objectFit={"center"}
-                                    w="100%"
-                                    height="auto"
-                                    borderTopRadius={"10px"}
-                                />
-                                <Box p="16px">
-                                    <Text fontSize="18px" fontWeight="500" mt="10px">
-                                        {data.name}
-                                    </Text>
-                                    <Text noOfLines={2} fontSize="14px" mt="10px">
-                                        {data.description}
-                                    </Text>
+        <Text
+          textAlign={"center"}
+          color={colors.gold}
+          fontSize={{ base: "18px", md: "30px", lg: "30px" }}
+          mt="10px"
+        >
+          Things I've built so far
+        </Text>
 
-                                    <Text mt="10px" fontSize="12px">
-                                        Click for more
-                                    </Text>
-                                </Box>
-                            </Box>
-                        </GridItem>
-                    ))}
-                </Slide>
-            </Grid>
-        </Box>
-    );
+        <Grid
+          templateColumns={{
+            base: "auto",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3,1fr)",
+          }}
+          gap="24px"
+          mt="50px"
+        >
+          {enums?.slice(0, displayCount)?.map((data, idx) => (
+            <GridItem key={data.id + idx}>
+              <Card content={data} />
+            </GridItem>
+          ))}
+        </Grid>
+
+        <Center mt="40px">
+          <Button
+            onClick={() => setShow(!show)}
+            bg={colors.gold}
+            _hover={{
+              opacity: 0.8,
+            }}
+          >
+            {show ? "Show Less" : "Show More"}
+          </Button>
+        </Center>
+      </Container>
+    </Box>
+  );
 };
 
 export default Projects;

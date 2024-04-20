@@ -1,107 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
-  Container,
   Text,
-  Image,
-  Button,
-  useMediaQuery,
   Icon,
+  Center,
+  Code,
+  Container,
+  Button,
 } from "@chakra-ui/react";
 import Layout from "../../layout";
-import profile from "../../assets/profile_pic.png";
 import {
   AiFillLinkedin,
   AiFillGithub,
   AiFillTwitterCircle,
 } from "react-icons/ai";
 import About from "../about";
+import { colors } from "../../utils/colors";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import Projects from "../projects";
-import styles from './styles.module.css'
-import { Fade } from "react-awesome-reveal";
 
 const Home = () => {
-  const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   return (
     <Layout>
-      <Box
-        paddingTop="8%"
-        h={isLargerThan800 ? "auto" : "auto"}
-        pb={isLargerThan800 ? "90px" : "100px"}
-        id='#home'
-
-      >
-        <Container maxW="container.lg">
-          <Box
-            display="flex"
-            flexDir={isLargerThan800 ? "row" : "column"}
-            gap="50px"
-            justifyContent={"space-between"}
-            w="100%"
+      <Box h="100dvh" display={"grid"} placeItems={"center"}>
+        <Box>
+          <Text
+            textAlign={"center"}
+            fontSize={{ base: "24px", md: "24px", lg: "30px" }}
           >
-            <Box>
-              <Image
-                src={profile}
-                alt="profile_pic"
-                w={isLargerThan800 ? "80vw" : "100%"}
-                h={isLargerThan800 ? "60vh" : "auto"}
-              />
-            </Box>
-
-            <Box>
-              <Fade direction='up' cascade triggerOnce>
-                <Text
-                  fontSize={isLargerThan800 ? "50px" : "30px"}
-                  fontWeight={700}
-                  color="#212121"
-
-                >
-                  Crafting digital experiences with code and creativity
-                </Text>
-                <Text
-                  fontSize="16px"
-                  color="#212121"
-                  textAlign={isLargerThan800 ? "left" : "justify"}
-                >
-                  Hi, I'm a Roland Enola a frontend developer with a passion for React JS, Redux, and
-                  CSS libraries. My focus is on building beautiful and intuitive
-                  user interfaces that engage and inspire. With years of
-                  experience in the industry, I bring a wealth of knowledge and
-                  expertise to every project.
-                </Text>
-
-              </Fade>
-
-              <a
-                href="mailto:aloneroland@gmail.com"
-                target={"_blank"}
-                rel="noreferrer noopener"
-              >
-                <Button
-                  mt="24px"
-                  bg="#212121"
-                  color="#fff"
-                  w={isLargerThan800 ? "auto" : "100%"}
-                  _hover={{ opacity: "0.8" }}
-                >
-                  Contact
-                </Button>
-              </a>
-            </Box>
-          </Box>
-
-          <Box mt='24px' className={styles.moving_text}>
-            {`${'while(alive){eat() code() sleep() game()} '}`}
-          </Box>
-
-          <Box>
-            <Box
-              display={"flex"}
-              gap="30px"
-              mt="10px"
-
-            >
+            Hi, I'm
+          </Text>
+          <Text
+            textAlign={"center"}
+            fontSize={{ base: "40px", md: "40px", lg: "70px" }}
+            color={colors.gold}
+            data-aos="fade-up"
+            data-aos-duration="3000"
+          >
+            Roland Enola
+          </Text>
+          <Text textAlign={"center"}>
+            A passionate{" "}
+            <span
+              style={{ color: colors.gold }}
+            >{`<Frontend Developer/>`}</span>{" "}
+          </Text>
+          <Center>
+            <Box display={"flex"} gap="30px" mt="20px">
               <a
                 href="https://www.linkedin.com/in/enola-roland-18704b135/"
                 target={"_blank"}
@@ -111,7 +61,7 @@ const Home = () => {
                   as={AiFillLinkedin}
                   fontSize="25px"
                   cursor="pointer"
-                  color="#212121"
+                  color={colors.gold}
                 />
               </a>
               <a
@@ -123,7 +73,7 @@ const Home = () => {
                   as={AiFillTwitterCircle}
                   fontSize="25px"
                   cursor="pointer"
-                  color="#212121"
+                  color={colors.gold}
                 />
               </a>
               <a
@@ -135,16 +85,50 @@ const Home = () => {
                   as={AiFillGithub}
                   fontSize="25px"
                   cursor="pointer"
-                  color="#212121"
+                  color={colors.gold}
                 />
               </a>
             </Box>
-          </Box>
+          </Center>
 
-          <About />
-          <Projects />
-        </Container>
+          <Center mt="10px">
+            <Code>{"while(alive){eat() code() sleep() game()} "}</Code>
+          </Center>
+        </Box>
       </Box>
+
+      <About />
+
+      <Projects/>
+
+
+      <Container maxW="container.lg" py='200px'>
+        <Box
+          p='40px'
+          borderRadius={"10px"}
+          bg={colors.light}
+          alignItems={{ base: "none", md: "center", lg: "center" }}
+          display={"flex"}
+          flexDir={{ base: 'column', md: 'column', lg: 'row' }}
+          justifyContent={"space-between"}
+          gap={"20px"}
+        >
+          <Text fontSize={'24px'} fontWeight={600}>Start a project</Text>
+
+          <Text textAlign={'center'}>
+            Interested in working together? we should queue up a time to chat.
+          </Text>
+
+          <Button
+            bg={colors.gold}
+            _hover={{
+              opacity: 0.8,
+            }}
+          >
+            Let's do this
+          </Button>
+        </Box>
+      </Container>
     </Layout>
   );
 };
